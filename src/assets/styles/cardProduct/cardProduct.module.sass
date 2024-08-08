@@ -1,0 +1,59 @@
+@import '../variables'
+
+.card
+    background-color: $secondary-color
+    color: $primary-color
+    padding: 20px
+    border-radius: 10px
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+    margin-bottom: 20px
+    transition: transform 0.3s ease
+
+    &:hover
+        transform: translateY(-5px)
+
+.name
+    font-size: 1.5rem
+    margin-bottom: 10px
+
+.description
+    font-size: 1rem
+    margin-bottom: 15px
+    color: $text-color
+
+.editButton
+    background-color: $primary-color
+    color: $secondary-color
+    padding: 8px 12px
+    border: none
+    border-radius: 5px
+    cursor: pointer
+    display: flex
+    align-items: center
+    gap: 8px
+    transition: background-color 0.3s ease
+
+    &:hover
+        background-color: lighten($primary-color, 10%)
+
+    .icon
+        font-size: 1.2rem
+
+// Estilos responsivos para dispositivos móveis
+@media (max-width: 600px)
+.card
+    padding: 15px
+    border-radius: 8px
+    margin-bottom: 15px
+
+    .name
+        font-size: 1.25rem
+
+    .description
+        font-size: 0.9rem
+
+    .editButton
+        padding: 6px 10px
+
+    .icon
+        font-size: 1rem

@@ -40,7 +40,8 @@ export const loginAsync = createAsyncThunk(
         }
 
         const data = await response.json();
-        return data.token;
+        console.log("data:"+data.token);
+        return JSON.stringify(data.token);
     }
 );
 
@@ -76,7 +77,7 @@ export const registerAsync = createAsyncThunk(
         }
 
         const data = await response.json();
-        return data.token;
+        return data;
     }
 );
 
@@ -99,7 +100,9 @@ const authSlice = createSlice({
                 state.isAuthenticated = true;
                 state.token = action.payload;
                 state.status = 'idle';
-                localStorage.setItem('token', action.payload);
+                if (typeof window !== 'undefined') {
+                    localStorage.setItem('token', action.payload);
+                }
             })
             .addCase(loginAsync.rejected, state => {
                 state.status = 'failed';
