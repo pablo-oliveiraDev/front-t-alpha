@@ -3,9 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import styles from '@/assets/styles/home/home.module.sass'
+import styles from '@/assets/styles/home/home.module.sass';
 import CardProducts from '@/app/components/cardProduct/page';
-
 
 interface Product {
     id: number;
@@ -35,8 +34,8 @@ export default function Home() {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        }
+                            Authorization: `Bearer ${token}`,
+                        },
                     }
                 );
 
@@ -49,7 +48,7 @@ export default function Home() {
                     return null;
                 }
 
-                const data = await response.json();               
+                const data = await response.json();
                 setProducts(data.data.products);
                 return data;
             } catch (error) {
@@ -59,20 +58,21 @@ export default function Home() {
         }
         fetchProducts();
     }, [token]);
-    
+
     if (!isAuthenticated) {
         router.push('/');
-    } else {
-        return (
-            <div className={styles.container}>
-                {products.length === 0 ? <>
-                    <h1>Vc ainda nao tem produtos cadastrados</h1></>
-                 : (
-                    products.map((product, index) => (
-                        <CardProducts key={index} products={product} />
-                    ))
-                )}
-            </div>
-        );
     }
+    return (
+        <div className={styles.container}>
+            {products.length === 0 ? (
+                <>
+                    <h1>Vc ainda nao tem produtos cadastrados</h1>
+                </>
+            ) : (
+                products.map((product, index) => (
+                    <CardProducts key={index} products={product} />
+                ))
+            )}
+        </div>
+    );
 }

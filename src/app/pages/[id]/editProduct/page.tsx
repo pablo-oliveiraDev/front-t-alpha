@@ -17,7 +17,6 @@ const EditProduct = () => {
     const router = useRouter();
     const searchParams = useParams();
     const id = Number(searchParams.id);
-    console.log(id)
     const [product, setProduct] = useState<Product | null>(null);
     const [error, setError] = useState<string | null>(null);
 
@@ -25,14 +24,14 @@ const EditProduct = () => {
         control,
         handleSubmit,
         reset,
-        formState: { errors }
+        formState: { errors },
     } = useForm<Product>({
         defaultValues: {
             name: '',
             description: '',
             price: 0,
-            stock: 0
-        }
+            stock: 0,
+        },
     });
 
     let token =
@@ -44,22 +43,24 @@ const EditProduct = () => {
         if (!id) return;
         async function fetchProduct() {
             try {
-                const response = await fetch(`https://interview.t-alpha.com.br/api/products/get-one-product/${id}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`
+                const response = await fetch(
+                    `https://interview.t-alpha.com.br/api/products/get-one-product/${id}`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${token}`,
+                        },
                     }
-                });
+                );
 
                 if (!response.ok) {
                     throw new Error(`Erro: ${response.statusText}`);
                 }
 
                 const data = await response.json();
-                console.log('editProduct :',data.data.product)
-                setProduct(data.data.product); // Salva os dados do produto na variável
-                reset(data.data.product); // Preenche o formulário com os dados do produto
+                setProduct(data.data.product);
+                reset(data.data.product);
             } catch (error) {
                 setError('Erro ao carregar o produto.');
                 console.error(error);
@@ -67,7 +68,7 @@ const EditProduct = () => {
         }
 
         fetchProduct();
-    }, [id, reset]);
+    }, [id, reset, token]);
 
     const onSubmit = async (data: Product) => {
         const product = {
@@ -77,20 +78,23 @@ const EditProduct = () => {
             stock: Number(data.stock),
         };
         try {
-            const response = await fetch(`https://interview.t-alpha.com.br/api/products/update-product/${id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify(product)
-            });
+            const response = await fetch(
+                `https://interview.t-alpha.com.br/api/products/update-product/${id}`,
+                {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify(product),
+                }
+            );
 
             if (!response.ok) {
                 throw new Error(`Erro: ${response.statusText}`);
             }
 
-            router.push('/home');
+            router.push('/pages/home');
         } catch (error) {
             setError('Erro ao atualizar o produto.');
             console.error(error);
@@ -101,19 +105,22 @@ const EditProduct = () => {
         if (!confirm('Tem certeza que deseja deletar este produto?')) return;
 
         try {
-            const response = await fetch(`https://interview.t-alpha.com.br/api/products/delete-product/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
+            const response = await fetch(
+                `https://interview.t-alpha.com.br/api/products/delete-product/${id}`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
                 }
-            });
+            );
 
             if (!response.ok) {
                 throw new Error(`Erro: ${response.statusText}`);
             }
 
-            router.push('/home');
+            router.push('/pages/home');
         } catch (error) {
             setError('Erro ao deletar o produto.');
             console.error(error);
@@ -139,7 +146,11 @@ const EditProduct = () => {
                                 />
                             )}
                         />
-                        {errors.name && <span className={styles.errorMessage}>{errors.name.message}</span>}
+                        {errors.name && (
+                            <span className={styles.errorMessage}>
+                                {errors.name.message}
+                            </span>
+                        )}
                     </label>
                     <label>
                         Descrição:
@@ -153,7 +164,11 @@ const EditProduct = () => {
                                 />
                             )}
                         />
-                        {errors.description && <span className={styles.errorMessage}>{errors.description.message}</span>}
+                        {errors.description && (
+                            <span className={styles.errorMessage}>
+                                {errors.description.message}
+                            </span>
+                        )}
                     </label>
                     <label>
                         Preço:
@@ -169,7 +184,11 @@ const EditProduct = () => {
                                 />
                             )}
                         />
-                        {errors.price && <span className={styles.errorMessage}>{errors.price.message}</span>}
+                        {errors.price && (
+                            <span className={styles.errorMessage}>
+                                {errors.price.message}
+                            </span>
+                        )}
                     </label>
                     <label>
                         Estoque:
@@ -184,13 +203,21 @@ const EditProduct = () => {
                                 />
                             )}
                         />
-                        {errors.stock && <span className={styles.errorMessage}>{errors.stock.message}</span>}
+                        {errors.stock && (
+                            <span className={styles.errorMessage}>
+                                {errors.stock.message}
+                            </span>
+                        )}
                     </label>
                     <div className={styles.buttons}>
                         <button type="submit" className={styles.saveButton}>
                             <FaSave /> Salvar
                         </button>
-                        <button type="button" onClick={handleDelete} className={styles.deleteButton}>
+                        <button
+                            type="button"
+                            onClick={handleDelete}
+                            className={styles.deleteButton}
+                        >
                             <FaTrash /> Deletar
                         </button>
                     </div>
