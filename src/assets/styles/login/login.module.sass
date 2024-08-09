@@ -9,7 +9,7 @@
     align-items: center
     min-height: 100vh
     font-family: sans-serif
-    
+
     //background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e)
 
     .main
@@ -18,7 +18,7 @@
         background: red
         overflow: hidden
         background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e)
-       
+
         background-position: center
         background-size: cover
         background-repeat: no-repeat
@@ -151,3 +151,53 @@
 
         #chk:checked ~ .signup label
             transform: scale(.6)
+
+    @media (max-width: 1200px)
+        .main
+            width: 35vw
+            height: 50vw
+
+            .login
+                width: 35vw
+                height: 50vw
+            //transform: translateY(-50vw)
+
+                input
+                    width: 25vw
+                    height: 3vw
+
+    @media (max-width: 992px)
+        .main
+            width: 50vw
+            height: 70vw
+
+            .login
+                width: 90vw
+                height: 120vw
+                transform: translateY(-130vw)
+
+                input
+                    width: 50vw
+                    height: 8vw
+
+    @media (max-width: 768px)
+        .main
+            width: 70vw
+            height: 90vw
+
+            .login
+
+                input
+                    width: 50vw
+                    height: 6vw
+
+    @media (max-width: 976px)
+        .main
+            width: 90vw
+            height: 130vw
+
+            .login
+
+                input
+                    width: 55vw
+                    height: 10vw

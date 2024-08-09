@@ -4,6 +4,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { useForm, Controller } from 'react-hook-form';
 import { FaSave, FaTrash } from 'react-icons/fa';
 import styles from '@/assets/styles/editProduct/editProduct.module.sass';
+import { toast } from 'react-toastify';
 
 interface Product {
     id: number;
@@ -93,7 +94,7 @@ const EditProduct = () => {
             if (!response.ok) {
                 throw new Error(`Erro: ${response.statusText}`);
             }
-
+            toast.success('Produto atualizado com sucesso!');
             router.push('/pages/home');
         } catch (error) {
             setError('Erro ao atualizar o produto.');
@@ -119,7 +120,7 @@ const EditProduct = () => {
             if (!response.ok) {
                 throw new Error(`Erro: ${response.statusText}`);
             }
-
+            toast.success('Produto deletado com sucesso!')
             router.push('/pages/home');
         } catch (error) {
             setError('Erro ao deletar o produto.');

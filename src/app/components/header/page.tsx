@@ -43,6 +43,7 @@ const Header = () => {
                         className={styles.logoutButton}
                     >
                         <FiLogOut className={styles.logoutIcon} />
+                        Sair
                     </button>
                 </ul>
             </nav>

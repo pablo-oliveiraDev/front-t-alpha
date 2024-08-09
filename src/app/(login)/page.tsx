@@ -5,6 +5,7 @@ import { loginAsync, registerAsync } from '@/features/authSlice';
 import { AppDispatch, RootState } from '@/store';
 import { useRouter } from 'next/navigation';
 import styles from '@/assets/styles/login/login.module.sass';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const [taxNumber, setTaxNumber] = useState<string>('');
@@ -30,10 +31,11 @@ const Login = () => {
         dispatch(loginAsync({ taxNumber, password }))
             .unwrap()
             .then(() => {
+                toast.success('Seja bem vindo novamente!')
                 router.push('/pages/home');
             })
             .catch(() => {
-                alert('Falha na autenticação');
+                toast.error('Falha na autenticação');
             })
             .finally(() => {
                 setTaxNumber('');
@@ -46,10 +48,11 @@ const Login = () => {
         dispatch(registerAsync({ name, taxNumber, mail, phone, password }))
             .unwrap()
             .then(() => {
+                toast.success('Login efetuado com sucesso!')
                 router.push('/pages/home');
             })
             .catch(() => {
-                alert('Falha no registro');
+                toast.error('Falha ao cadastrar novo cliente!');
             })
             .finally(() => {
                 setTaxNumber('');

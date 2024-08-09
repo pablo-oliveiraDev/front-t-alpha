@@ -3,6 +3,7 @@ import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import styles from '@/assets/styles/registerProduct/registerProduct.module.sass';
+import { toast } from 'react-toastify';
 
 interface ProductFormInputs {
     name: string;
@@ -60,10 +61,12 @@ export default function RegisterProduct() {
             }
 
             const result = await response.json();
+            toast.success('Produto cadastrado com sucesso:');
             console.log('Produto cadastrado com sucesso:', result);
 
             router.push('/pages/home');
         } catch (error) {
+            toast.error('Erro ao cadastrar produto');
             console.error('Erro ao cadastrar produto:', error);
         } finally {
             reset();

@@ -17,7 +17,6 @@ const initialState: AuthState = {
     status: 'idle'
 };
 
-// Thunk para o login
 export const loginAsync = createAsyncThunk(
     'auth/login',
     async ({
@@ -47,7 +46,7 @@ export const loginAsync = createAsyncThunk(
     }
 );
 
-// Thunk para o registro
+
 export const registerAsync = createAsyncThunk(
     'auth/register',
     async ({
