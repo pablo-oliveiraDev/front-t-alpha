@@ -1,6 +1,9 @@
 export const fetchWithAuth = async (url: string, options: RequestInit = {}) => {
-    const token = window.localStorage.getItem('token'); 
-    console.log(token);
+    let token =
+        typeof window !== 'undefined'
+            ? window.localStorage.getItem('token')
+            : null;
+    
     const headers = {
         ...options.headers,
         Authorization: `Bearer ${token}`, 
