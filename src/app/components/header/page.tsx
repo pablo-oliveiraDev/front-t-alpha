@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, selectIsAuthenticated } from '@/features/authSlice';
 import { useRouter } from 'next/navigation';
-import { FiLogOut, FiPlusSquare, FiEdit, FiTrash2 } from 'react-icons/fi';
+import { FiLogOut, FiPlusSquare, FiHome, FiTrash2 } from 'react-icons/fi';
 import styles from '@/assets/styles/header/header.module.sass';
 const Header = () => {
     const dispatch = useDispatch();
@@ -26,22 +26,25 @@ const Header = () => {
             </div>
             <nav className={styles.nav}>
                 <ul className={styles.menu}>
-                    <li onClick={() => handleNavigation('/pages/novo')}>
+                    <li onClick={() => handleNavigation('/pages/home')}>
+                        <FiHome className={styles.icon} />
+                        Home
+                    </li>
+                    <li
+                        onClick={() =>
+                            handleNavigation('/pages/registerProduct')
+                        }
+                    >
                         <FiPlusSquare className={styles.icon} />
                         Novo
                     </li>
-                    <li onClick={() => handleNavigation('/pages/editar')}>
-                        <FiEdit className={styles.icon} />
-                        Editar
-                    </li>
-                    <li onClick={() => handleNavigation('/pages/deletar')}>
-                        <FiTrash2 className={styles.icon} />
-                        Deletar
-                    </li>
+                    <button
+                        onClick={handleLogout}
+                        className={styles.logoutButton}
+                    >
+                        <FiLogOut className={styles.logoutIcon} />
+                    </button>
                 </ul>
-                <button onClick={handleLogout} className={styles.logoutButton}>
-                    <FiLogOut className={styles.logoutIcon} />
-                </button>
             </nav>
         </header>
     );

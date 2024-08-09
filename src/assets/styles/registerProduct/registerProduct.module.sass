@@ -1,0 +1,70 @@
+.container
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 83vh
+    background-color: #eaeaea
+    overflow: hidden
+
+.form
+    width: 100%
+    max-width: 400px
+    margin: 0 
+    padding: 20px
+    background-color: #f7f7f7
+    border-radius: 8px
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+
+    @media (min-width: 768px)
+        max-width: 500px
+
+    .formGroup
+        margin-bottom: 15px
+
+        label
+            display: block
+            margin-bottom: 8px
+            font-weight: bold
+            color: #333
+            font-size: 14px
+
+            @media (min-width: 768px)
+                font-size: 16px
+
+        input
+            width: 100%
+            padding: 10px
+            font-size: 16px
+            border: 1px solid #ddd
+            border-radius: 4px
+            box-sizing: border-box
+            appearance: none
+
+            &:focus
+                border-color: #0070f3
+                outline: none
+
+            &[type="number"]
+                -moz-appearance: textfield
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button
+                -webkit-appearance: none
+                margin: 0
+
+        span
+            color: red
+            font-size: 12px
+
+    button
+        width: 100%
+        padding: 12px
+        background-color: #0070f3
+        color: white
+        font-size: 18px
+        border: none
+        border-radius: 4px
+        cursor: pointer
+
+        &:hover
+            background-color: #005bb5

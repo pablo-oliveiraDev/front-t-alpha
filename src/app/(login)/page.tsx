@@ -23,7 +23,7 @@ const Login = () => {
         if (isAuthenticated) {
             router.push('/pages/home');
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, router]);
 
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
@@ -83,7 +83,7 @@ const Login = () => {
                             type="text"
                             name="taxnumber"
                             placeholder="CPF OR CNPJ"
-                            required={true}
+                            required
                             value={taxNumber}
                             onChange={(
                                 e: React.ChangeEvent<HTMLInputElement>

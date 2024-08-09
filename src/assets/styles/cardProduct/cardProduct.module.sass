@@ -1,25 +1,34 @@
 @import '../variables'
+@import '../mixins'
 
 .card
+    @include verticalAlignFlex
     background-color: $secondary-color
     color: $primary-color
-    padding: 20px
+    padding: 2px
+    margin-top: 20px
     border-radius: 10px
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
     margin-bottom: 20px
     transition: transform 0.3s ease
+    width: 10vw
 
     &:hover
         transform: translateY(-5px)
+        border: 1px solid $primary-color
 
 .name
     font-size: 1.5rem
     margin-bottom: 10px
 
 .description
+    @include verticalAlignFlex
+    
     font-size: 1rem
-    margin-bottom: 15px
+    margin-bottom: 5px
     color: $text-color
+    span
+            font-weight: bold
 
 .editButton
     background-color: $primary-color
@@ -48,6 +57,7 @@
 
     .name
         font-size: 1.25rem
+        
 
     .description
         font-size: 0.9rem

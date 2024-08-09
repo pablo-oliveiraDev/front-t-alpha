@@ -9,8 +9,11 @@ interface AuthState {
 
 const initialState: AuthState = {
     isAuthenticated:
-        typeof window !== 'undefined' && !!localStorage.getItem('token'),
-    token: typeof window !== 'undefined' ? localStorage.getItem('token') : null,
+        typeof window !== 'undefined' && !!window.localStorage.getItem('token'),
+    token:
+        typeof window !== 'undefined'
+            ? window.localStorage.getItem('token')
+            : null,
     status: 'idle'
 };
 
@@ -40,8 +43,7 @@ export const loginAsync = createAsyncThunk(
         }
 
         const data = await response.json();
-        console.log("data:"+data.token);
-        return JSON.stringify(data.token);
+        return data.data.token;
     }
 );
 
